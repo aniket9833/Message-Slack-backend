@@ -1,6 +1,5 @@
 export default function crudRepository(model) {
     return {
-        model: schema,
         create: async function(data) {
             const newDoc = model.create(data);
             return newDoc;
