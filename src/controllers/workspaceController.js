@@ -4,7 +4,8 @@ import {
   createWorkspaceService,
   deleteWorkspaceService,
   getWorkspaceService,
-  getWorkspacesUserIsMemberOfService
+  getWorkspacesUserIsMemberOfService,
+  resetWorkspaceJoinCodeService
 } from '../services/workspaceService.js';
 import {
   customErrorResponse,
@@ -80,6 +81,26 @@ export const getWorkspaceController = async (req, res) => {
       .json(successResponse(response, 'Workspace deleted successfully'));
   } catch (error) {
     console.log('Get workspace controller error', error);
+    if (error.statusCode) {
+      return res.status(error.statusCode).json(customErrorResponse(error));
+    }
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json(internalErrorResponse(error));
+  }
+};
+
+export const resetJoinCodeController = async (req, res) => {
+  try {
+    const response = await resetWorkspaceJoinCodeService(
+      req.params.workspaceId,
+      req.user
+    );
+    return res
+      .status(StatusCodes.OK)
+      .json(successResponse(response, 'Join code reset successfully'));
+  } catch (error) {
+    console.log('reset join code controller error', error);
     if (error.statusCode) {
       return res.status(error.statusCode).json(customErrorResponse(error));
     }
