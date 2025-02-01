@@ -63,7 +63,6 @@ export const verifyTokenService = async (token) => {
     user.verificationToken = null;
     user.verificationTokenExpiry = null;
     await user.save();
-    console.log(user);
     return user;
   } catch (error) {
     console.log('User service error', error);

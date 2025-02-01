@@ -10,9 +10,14 @@ import ClientError from '../utils/errors/clientError.js';
 import ValidationError from '../utils/errors/validationError.js';
 
 const isUserAdminOfWorkspace = (workspace, userId) => {
-  return workspace.members.find(
-    (member) => member.memberId.toString() === userId && member.role === 'admin'
+  console.log(workspace.members, userId);
+  const response = workspace.members.find(
+    (member) =>
+      (member.memberId.toString() === userId ||
+        member.memberId._id.toString() === userId) &&
+      member.role === 'admin'
   );
+  return response;
 };
 
 export const isUserMemberOfWorkspace = (workspace, userId) => {
