@@ -4,7 +4,7 @@ import channelRouter from './channel.js';
 import memberRouter from './members.js';
 import messageRouter from './messages.js';
 import userRouter from './users.js';
-import workspaceRouter from './workspace.js';
+import workspaceRouter from './workspaces.js';
 
 const router = express.Router();
 
