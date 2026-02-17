@@ -101,5 +101,6 @@ export const signInService = async (data) => {
     };
   } catch (error) {
     console.log('User service error', error);
+    throw error;
   }
 };
